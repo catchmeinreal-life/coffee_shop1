@@ -14,6 +14,7 @@ import initializePassport from './passport-config.js';
 import passport from 'passport';
 import flash from 'express-flash'
 import session from 'express-session'
+import methodOverride from 'method-override'; 
 
 initializePassport(
     passport,
@@ -40,6 +41,7 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(methodOverride('_method'));
 
 const users = [];  //create table users in our database id, username, email, password , date joined
 
@@ -52,19 +54,19 @@ app.listen(PORT);
 
 //setting routes
 
-app.get('/', (req, res) =>{
-    res.render('index'); //render index.ejs
+app.get('/',checkAuthenticated, (req, res) =>{ 
+    res.render('index'); //render index.ejs { name : req.user.name}
 });
 
-app.get('/login', (req, res) =>{
+app.get('/login', checkNotAuthenticated, (req, res) =>{
     res.render('login'); //render login.ejs
 });
 
-app.get('/register', (req, res) =>{
+app.get('/register', checkNotAuthenticated, (req, res) =>{
     res.render('register'); //render index.ejs
 });
 
-app.post('/register', async (req, res) => {  //add user to the database  >> username, email, password , date joined
+app.post('/register',checkNotAuthenticated, async (req, res) => {  //add user to the database  >> username, email, password , date joined
     try {
 
         const hashedPassword = await bcrypt.hash(req.body.password, 10);
@@ -83,10 +85,31 @@ app.post('/register', async (req, res) => {  //add user to the database  >> user
     }
 });
 
-app.post('/login', passport.authenticate('local',{
+app.post('/login',checkNotAuthenticated, passport.authenticate('local',{
     successRedirect : '/',
     failureRedirect : '/login',
     failureFlash : true
-   
-
 }));
+
+app.delete('/logout', (req,res, next) =>{
+    req.logout( function (error) {
+        if (error) return next(error);
+        res.redirect('/login'); //redirect to login page after logout
+    });
+});
+
+
+//middlewa
+function checkAuthenticated(req, res, next){
+    if (req.isAuthenticated()) {
+        return next();
+    }
+    res.redirect('/login')
+};
+
+function checkNotAuthenticated(req, res, next){
+    if (req.isAuthenticated()) {
+        return res.redirect('/')
+    }
+    next()
+}
