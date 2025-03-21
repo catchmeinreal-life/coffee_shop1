@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!---font awesome cdn link-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- custom css link -->
+    
+    <!-- <link rel="stylesheet" href="css/index.css"> -->
+    <link rel="stylesheet" href="/css/index.css">
+   
+
+</head>
+<body>
+    
+    <!-- header section starts -->
+     <section>
+        <header class="header">
+            <a href="#" class="logo"><i class="fas fa-shopping-basket"></i> grocery </a>
+            
+    
+            <nav class="navBar">  <!---web page links-->
+                <a href="#home">Home</a>
+                <a href="#about">About Us</a>
+                <a href="#products">products</a>
+                <a href="#review">review</a>
+                <a href="#blogs">blogs</a>
+            </nav>
+    
+            <div class="icons">
+                <div class="fas fa-bars" id="menu-btn"></div>
+                <div class="fas fa-search" id="search-btn"></div>  <!---onclick search btn-- search for service---->
+                <div class="fas fa-shopping-cart" id="cart-btn"></div> <!--cart icon-->
+                <div class="fas fa-user" id="login-btn"></div>  <!----log out-->
+            </div>
+                    <!----search box-->
+            <form action="" class="search-form">
+                <input type="search" id="search-box" placeholder="search here...">
+                <label for="search-box" class="fas fa-search"></label>
+            </form>
+    
+            <!---cart items.
+            image, name, price, quantity     option to remove items from the cart-- for item in cart list(selected items)-->
+            <div class="shopping-cart">
+                <div class="box">
+                    <i class="fas fa-trash"></i>
+                    <img src="images/melon.jpeg" alt="melon"> <!--image-->
+                    <div class="content">
+                        <h3>Watermelon</h3>  <!--name-->
+                        <span class="price">$20/-</span> <!--price-->
+                        <span class="quantity">qty : 1</span> <!--quantity-->
+                    </div>
+                </div>
+    
+                <div class="box">
+                    <i class="fas fa-trash"></i>
+                    <img src="images/orange.jpeg" alt="orange"> <!--image-->
+                    <div class="content">
+                        <h3>Orange</h3>  <!--name-->
+                        <span class="price">$10/-</span> <!--price-->
+                        <span class="quantity">qty : 5</span> <!--quantity-->
+                    </div>
+                </div>
+    
+                <div class="box">
+                    <i class="fas fa-trash"></i>
+                    <img src="images/apple.jpeg" alt="apple"> <!--image-->
+                    <div class="content">
+                        <h3>Apple</h3>  <!--name-->
+                        <span class="price">$40/-</span> <!--price-->
+                        <span class="quantity">qty : 1</span> <!--quantity-->
+                    </div>
+                </div>
+                <div class="total">total : $110/-</div> <!--cart total-->
+                <a href="#" class="btn">Check out</a>  <!---on click payment-->
+            </div>
+    
+         </header>
+     </section>
+     
+
+     <section class="hero">
+        <div id="d2">
+            <h1>Good Coffee will<br/>Always Find The<br/>Audience</h1>
+            <p>We provide a variety of unique and Best Coffees</p>
+            <button class="btn">Order Now</button>
+          </div>
+
+      </section>
+
+
+
+    <!-- custom js link -->
+    <script src="/js/script.js"></script>
+    <!-----jquery link-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+</body>
+</html>

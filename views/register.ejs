@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h1>register</h1>
+
+    <!-- the modal -->
+    <div id="id01" class="modal">
+
+
+
+        <!-- modal content -->
+         <form action="/register" method="post" class="modal-content animate">
+            <div class="container">
+
+                <label for="username"><b>User Name</b></label>
+                <input type="text" name="userName" placeholder="Enter Username" required id="">
+                <br>
+
+                <label for="email"><b>Email</b></label>
+                <input type="email" name="email" id="" placeholder="user@mail.com" required>
+                <br>
+                <!--  -->
+
+                <label for="psw"><b>Password</b></label>
+                <input type="password" name="password" placeholder="Enter password" required id="">
+                <br>
+
+                <!-- ADD a second password to verify -->
+
+                <button type="submit">Sign UP</button>
+                
+                <label for=""><input type="checkbox" checked="checked" name="remember" id="">remember me</label>
+
+            </div>
+
+            <div class="container" style="background-color: #f1f1f1;">
+                <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                
+            </div>
+
+         </form>
+
+         <a href="/login">login</a>
+
+     </div>
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

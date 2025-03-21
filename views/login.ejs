@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- loca css link -->
+     <!-- <link rel="stylesheet" href="/css/login.css"> -->
+     <!-- local js script -->
+      <script src="/js/login.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="document.getElementById('id01').style.display='block'">login</button>
+
+    <!-- the modal -->
+     <div id="id01" class="modal">
+        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="close modal">&times;</span>
+
+        <!-- modal content -->
+         
+        <% if (messages.error){ %>
+            <%= messages.error %>
+        <% } %>
+
+         <form action="" method="post" class="modal-content animate">
+
+            <div class="imgcontainer">
+                <img src="../avatar.png" alt="avatar img user profile" class="avatar">
+            </div>
+
+            <div class="container">
+                <label for="email"><b>Enter Email</b></label>
+                <input type="email" name="email" placeholder="Enter email" required id="">
+
+                <label for="password"><b>Password</b></label>
+                <input type="password" name="password" placeholder="Enter password" required id="">
+
+                <button type="submit">Login</button>
+                
+                <label for=""><input type="checkbox" checked="checked" name="remember" id="">remember me</label>
+
+            </div>
+
+            <div class="container" style="background-color: #f1f1f1;">
+                <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                <span class="psw">Forgot <a href="#reset psw">password?</a></span>
+            </div>
+
+         </form>
+
+         <a href="/register">Sign Up</a>
+
+     </div>
+
+
+
+
+</body>
+</html>
