@@ -15,22 +15,31 @@ import passport from 'passport';
 import flash from 'express-flash'
 import session from 'express-session'
 
+//DB
+import { connectDB } from './config/db.js';
+
+import userRoutes from './routes/user.route.js'
+// import { error } from 'console';
+
 initializePassport(
     passport,
-    email => users.find(user  => user.email == email),
-    id => users.find(user => user.id === id)
+    email => user.find(user  => user.email == email),
+    id => user.find(user => user.id === id)
 )
 
 // import mysql from 'mysql2';
 
 
 const app = express();
+// set up EJS as template engine
+app.set('view engine', 'ejs');
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 // app.use(express.static('public'));
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(flash());
 app.use(session({
     secret : process.env.SESSION_SECRET,
@@ -41,48 +50,25 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-const users = [];  //create table users in our database id, username, email, password , date joined
 
-app.set('view engine', 'ejs');
+//db integration
+app.use(express.json());  //allows accepting of JSON data in the route body
 
 
+//Routes
+app.use('/user/register', userRoutes )
 
-const PORT = 3000;
-app.listen(PORT);
 
-//setting routes
-
+//page rendering
 app.get('/', (req, res) =>{
     res.render('index'); //render index.ejs
 });
 
+
+
 app.get('/login', (req, res) =>{
     res.render('login'); //render login.ejs
 });
-
-app.get('/register', (req, res) =>{
-    res.render('register'); //render index.ejs
-});
-
-app.post('/register', async (req, res) => {  //add user to the database  >> username, email, password , date joined
-    try {
-
-        const hashedPassword = await bcrypt.hash(req.body.password, 10);
-
-        users.push({  //push to list for now
-
-            id : Date.now().toString(),
-            name : req.body.userName,
-            email : req.body.email,
-            password : hashedPassword
-
-        })
-        res.redirect('/login');
-    } catch {
-        res.redirect('/register');
-    }
-});
-
 app.post('/login', passport.authenticate('local',{
     successRedirect : '/',
     failureRedirect : '/login',
@@ -90,3 +76,25 @@ app.post('/login', passport.authenticate('local',{
    
 
 }));
+
+app.get('/register', (req, res) =>{
+    res.render('register'); //render index.ejs
+});
+
+
+
+
+const startServer = async () => {
+    try{
+        await connectDB();
+        const PORT = 3000;
+        app.listen(PORT, (error) => {
+            if (error) throw error;
+            console.log(`Web app is running at port ${PORT} ...`)
+        });
+    } catch (error) {
+        console.error('Error connecting to the database', error.message);
+    }
+};
+
+startServer();
